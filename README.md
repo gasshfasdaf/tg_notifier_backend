@@ -20,6 +20,7 @@ uv run python -m app.main
 
 # Run all in Docker
 docker compose -f docker-compose.yml up -d
+docker compose exec app uv run python scripts/run_migrations.py
 docker compose exec app uv run python scripts/load_fixtures.py
 
 
