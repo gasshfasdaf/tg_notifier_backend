@@ -19,11 +19,11 @@ uv run python -m app.main
 
 # Run all in Docker
 docker compose -f docker-compose.yml up -d
-docker-compose exec app uv run python scripts/load_fixtures.py
+docker compose exec app uv run python scripts/load_fixtures.py
 
 
 # Подключаемся к PostgreSQL
-docker-compose -f docker-compose.db.yml exec postgres psql -U app_user -d notifier_db
+docker compose -f docker-compose.db.yml exec postgres psql -U app_user -d notifier_db
 
 # В psql создаем тестовую БД
 CREATE DATABASE test_db;

@@ -6,7 +6,7 @@ from app.services.monitoring_service import monitoring_service
 
 router = APIRouter(prefix="/monitoring", tags=["monitoring"])
 
-@router.post("/check-all")
+@router.post("/check_all")
 async def check_all_resources(db: AsyncSession = Depends(get_db)):
     """Manually check all resources."""
     try:
