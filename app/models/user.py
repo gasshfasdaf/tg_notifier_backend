@@ -1,12 +1,14 @@
 from sqlmodel import SQLModel, Field, Relationship
 from typing import Optional, List
 from datetime import datetime
+from app.models.types import TelegramChatIDType
+
 
 class User(SQLModel, table=True):
     __tablename__ = "users"
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    telegram_chat_id: int = Field(index=True, unique=True, nullable=False)
+    telegram_chat_id: TelegramChatIDType = Field(index=True, unique=True, nullable=False)
     username: str = Field(index=True, nullable=False)
     first_name: Optional[str] = Field(default=None)
     last_name: Optional[str] = Field(default=None)
