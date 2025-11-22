@@ -5,6 +5,8 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 from app.database import get_db
 from app.models.user import User
 from app.services.telegram_service import telegram_service
+from app.dependencies.feature_flags import require_telegram_webhook
+from app.middleware.rate_limiting import auth_rate_limit
 import logging
 
 logger = logging.getLogger(__name__)
@@ -13,6 +15,7 @@ router = APIRouter(prefix="/webhook/telegram", tags=["telegram"])
 
 
 @router.post("")
+@auth_rate_limit
 async def handle_telegram_webhook(
         request: Request,
         db: AsyncSession = Depends(get_db)

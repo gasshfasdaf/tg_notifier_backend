@@ -1,4 +1,6 @@
-from typing import List, Optional
+from typing import List, Optional, Any, Coroutine, Sequence
+
+from sqlalchemy import Row, RowMapping
 from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 from app.models.user import User
@@ -20,8 +22,22 @@ class UserRepository(BaseRepository[User, None, None]):
         )
         return result.scalar_one_or_none()
 
-    async def get_active_users(self) -> List[User]:
+    async def get_active_users(self) -> Sequence[Row[Any] | RowMapping | Any]:
         result = await self.db.execute(
             select(User).where(User.is_active == True)
         )
         return result.scalars().all()
+
+    async def create(self, user: User) -> User:
+        """Create a new user."""
+        self.db.add(user)
+        await self.db.commit()
+        await self.db.refresh(user)
+        return user
+
+    async def update(self, user: User) -> User:
+        """Update user."""
+        self.db.add(user)
+        await self.db.commit()
+        await self.db.refresh(user)
+        return user

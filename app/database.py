@@ -1,6 +1,5 @@
-from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy import text
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from sqlmodel import SQLModel
 from sqlmodel.ext.asyncio.session import AsyncSession as SQLModelAsyncSession
 from app.config import settings
@@ -8,6 +7,7 @@ import asyncio
 
 from app.models.user import User
 from app.models.resource import MonitoredResource
+from app.services.feature_flags import FeatureFlag
 
 async_database_url = settings.database_url.replace("postgresql://", "postgresql+asyncpg://")
 
@@ -56,7 +56,7 @@ async def wait_for_db(max_retries: int = 10, delay: int = 3):
         try:
             async with engine.begin() as conn:
                 await conn.execute(text("SELECT 1"))
-            print("✅ Database connection successful")
+            print("Database connection successful")
             return True
         except Exception as e:
             print(f"Database connection attempt {attempt + 1}/{max_retries} failed: {e}")

@@ -20,7 +20,7 @@ TEST_RESOURCES = [
     ResourceCreate(
         name="Test Website",
         url="https://example.com",
-        user_id=1,  # Будет установлено в тестах
+        user_id=1,
         check_interval=300
     ),
     ResourceCreate(

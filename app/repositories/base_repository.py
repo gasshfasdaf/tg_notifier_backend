@@ -21,26 +21,19 @@ class BaseRepository(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         result = await self.db.execute(select(self.model).offset(skip).limit(limit))
         return result.scalars().all()
 
-    async def create(self, obj_in: CreateSchemaType) -> ModelType:
-        db_obj = self.model(**obj_in.dict())
-        self.db.add(db_obj)
+    async def create(self, obj: ModelType) -> ModelType:
+        """Create a new object."""
+        self.db.add(obj)
         await self.db.commit()
-        await self.db.refresh(db_obj)
-        return db_obj
+        await self.db.refresh(obj)
+        return obj
 
-    async def update(self, id: int, obj_in: UpdateSchemaType) -> Optional[ModelType]:
-        db_obj = await self.get(id)
-        if not db_obj:
-            return None
-
-        update_data = obj_in.dict(exclude_unset=True)
-        for field, value in update_data.items():
-            setattr(db_obj, field, value)
-
-        self.db.add(db_obj)
+    async def update(self, obj: ModelType) -> ModelType:
+        """Update an object."""
+        self.db.add(obj)
         await self.db.commit()
-        await self.db.refresh(db_obj)
-        return db_obj
+        await self.db.refresh(obj)
+        return obj
 
     async def delete(self, id: int) -> bool:
         db_obj = await self.get(id)

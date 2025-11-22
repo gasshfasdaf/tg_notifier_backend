@@ -12,7 +12,8 @@ dependencies = [
     "pydantic-settings>=2.12.0",
     "sqlalchemy>=2.0.44",
     "uvicorn>=0.38.0",
-    "sqlmodel>=0.0.18"
+    "sqlmodel>=0.0.18",
+    "slowapi"
 ]
 
 [build-system]

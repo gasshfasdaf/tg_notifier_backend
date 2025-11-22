@@ -2,6 +2,8 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import text
 from sqlmodel.ext.asyncio.session import AsyncSession
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
 
 from app.config import settings
 from app.database import get_db
@@ -10,6 +12,8 @@ from app.api.users import router as users_router
 from app.api.resources import router as resources_router
 from app.api.telegram import router as telegram_router
 from app.api.monitoring import router as monitoring_router
+from app.api.admin import router as admin_router
+from app.middleware.rate_limiting import limiter
 
 # Используем lifespan вместо on_event
 app = FastAPI(
@@ -19,11 +23,16 @@ app = FastAPI(
     lifespan=lifespan  # ← ПЕРЕДАЕМ LIFESPAN
 )
 
+# Initialize rate limiting
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
 # Include routers
 app.include_router(users_router)
 app.include_router(resources_router)
 app.include_router(telegram_router)
 app.include_router(monitoring_router)
+app.include_router(admin_router)
 
 # CORS middleware
 app.add_middleware(
