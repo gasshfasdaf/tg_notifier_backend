@@ -1,0 +1,59 @@
+tg_notifier_backend/
+├── app/
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── resources.py
+│   │   └── users.py
+│   ├── models/
+│   │   ├── __init__.py
+│   │   ├── resource.py
+│   │   └── user.py
+│   ├── repositories/
+│   │   ├── __init__.py
+│   │   ├── base_repository.py
+│   │   ├── resource_repository.py
+│   │   └── user_repository.py
+│   ├── schemas/
+│   │   ├── __init__.py
+│   │   ├── resource_schemas.py
+│   │   └── user_schemas.py
+│   ├── services/
+│   │   ├── __init__.py
+│   │   ├── base_service.py
+│   │   ├── resource_service.py
+│   │   ├── telegram_service.py
+│   │   └── user_service.py
+│   ├── __init__.py
+│   ├── config.py
+│   ├── database.py
+│   ├── dependencies.py
+│   └── main.py
+├── docker/
+│   └── postgres/
+│       └── init.sql
+├── ptools/
+│   ├── check_fullcode.py
+│   ├── project_tree.py
+│   ├── project_tree_update.py
+│   └── target_structure.txt
+├── scripts/
+│   └── load_fixtures.py
+├── tests/
+│   ├── features/
+│   │   ├── user_management.feature
+│   │   ├── resource_management.feature
+│   │   └── health_check.feature
+│   ├── steps/
+│   │   ├── test_user_steps.py
+│   │   ├── test_resource_steps.py
+│   │   └── test_health_steps.py
+│   ├── conftest.py
+│   └── fixtures/
+│       └── test_data.py
+├── .env
+├── docker-compose.db.yml
+├── docker-compose.yml
+├── Dockerfile
+├── pyproject.toml
+├── README.md
+└── uv.lock
