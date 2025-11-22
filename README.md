@@ -12,6 +12,7 @@ uv sync
 
 # Run only database in Docker
 docker compose -f docker-compose.db.yml up -d
+uv run python scripts/run_migrations.py
 uv run python scripts/load_fixtures.py
 uv run python -m app.main
 
