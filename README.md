@@ -35,7 +35,7 @@ pytest tests/ -v
 pytest tests/ -m bdd -v
 
 # Или конкретные step-файлы
-pytest tests/steps/test_user_steps.py -v
-pytest tests/steps/test_health_steps.py -v  
-pytest tests/steps/test_resource_steps.py -v
+pytest tests/steps/test_user_steps_async.py -v
+pytest tests/steps/test_health_steps_async.py -v  
+pytest tests/steps/test_resource_steps_async.py -v
 ```

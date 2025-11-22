@@ -4,9 +4,7 @@ from fastapi import status
 from pathlib import Path
 
 # Import feature files
-feature_dir = Path(__file__).parent.parent / "features"
-scenarios(feature_dir / "health_check.feature")
-
+scenarios("../features/health_check.feature")
 
 @pytest.fixture
 def context():

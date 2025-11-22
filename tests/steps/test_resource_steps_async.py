@@ -6,9 +6,7 @@ from app.models.user import User
 from app.models.resource import MonitoredResource
 from tests.fixtures.test_data import TEST_USERS, TEST_RESOURCES
 
-feature_dir = Path(__file__).parent.parent / "features"
-scenarios(feature_dir / "resource_management.feature")
-
+scenarios("../features/resource_management.feature")
 
 @pytest.fixture
 def context():
