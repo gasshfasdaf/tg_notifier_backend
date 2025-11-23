@@ -36,8 +36,8 @@ packages = ["app"]
 dev = [
     "pytest>=7.0.0",
     "pytest-asyncio>=0.21.0",
-    "pytest-bdd>=7.0.0",      # ← ДОБАВЛЯЕМ BDD
+    "pytest-bdd>=7.0.0",
     "httpx>=0.24.0",
-    "pytest-mock>=3.0.0",     # Для мокинга
-    "requests>=2.25.0",       # Для HTTP запросов в тестах
+    "pytest-mock>=3.0.0",
+    "requests>=2.25.0",
 ]
